@@ -1,5 +1,6 @@
 import { NavLink } from "@/components/NavLink";
 import { Calculator, BarChart3, Target, Settings } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
   const linkClass = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-muted-foreground hover:text-foreground";
@@ -15,24 +16,27 @@ export function Navbar() {
           <span className="font-bold text-lg tracking-tight">NurtureROI</span>
         </div>
 
-        <nav className="flex items-center gap-1">
-          <NavLink to="/" end className={linkClass} activeClassName={activeClass}>
-            <Calculator className="h-4 w-4" />
-            <span className="hidden sm:inline">Calculator</span>
-          </NavLink>
-          <NavLink to="/results" className={linkClass} activeClassName={activeClass}>
-            <BarChart3 className="h-4 w-4" />
-            <span className="hidden sm:inline">Results</span>
-          </NavLink>
-          <NavLink to="/benchmarks" className={linkClass} activeClassName={activeClass}>
-            <Target className="h-4 w-4" />
-            <span className="hidden sm:inline">Benchmarks</span>
-          </NavLink>
-          <NavLink to="/integrations" className={linkClass} activeClassName={activeClass}>
-            <Settings className="h-4 w-4" />
-            <span className="hidden sm:inline">Integrations</span>
-          </NavLink>
-        </nav>
+        <div className="flex items-center gap-2">
+          <nav className="flex items-center gap-1">
+            <NavLink to="/" end className={linkClass} activeClassName={activeClass}>
+              <Calculator className="h-4 w-4" />
+              <span className="hidden sm:inline">Calculator</span>
+            </NavLink>
+            <NavLink to="/results" className={linkClass} activeClassName={activeClass}>
+              <BarChart3 className="h-4 w-4" />
+              <span className="hidden sm:inline">Results</span>
+            </NavLink>
+            <NavLink to="/benchmarks" className={linkClass} activeClassName={activeClass}>
+              <Target className="h-4 w-4" />
+              <span className="hidden sm:inline">Benchmarks</span>
+            </NavLink>
+            <NavLink to="/integrations" className={linkClass} activeClassName={activeClass}>
+              <Settings className="h-4 w-4" />
+              <span className="hidden sm:inline">Integrations</span>
+            </NavLink>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
