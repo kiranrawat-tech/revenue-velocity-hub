@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Calculator from "./pages/Calculator";
 import ResultsDashboard from "./pages/ResultsDashboard";
 import Benchmarks from "./pages/Benchmarks";
+import IntegrationSettings from "./pages/IntegrationSettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Calculator />} />
           <Route path="/results" element={<ResultsDashboard />} />
           <Route path="/benchmarks" element={<Benchmarks />} />
+          <Route path="/integrations" element={<IntegrationSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

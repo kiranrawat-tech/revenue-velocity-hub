@@ -1,5 +1,5 @@
 import { NavLink } from "@/components/NavLink";
-import { Calculator, BarChart3, Target } from "lucide-react";
+import { Calculator, BarChart3, Target, Settings } from "lucide-react";
 
 export function Navbar() {
   const linkClass = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-muted-foreground hover:text-foreground";
@@ -27,6 +27,10 @@ export function Navbar() {
           <NavLink to="/benchmarks" className={linkClass} activeClassName={activeClass}>
             <Target className="h-4 w-4" />
             <span className="hidden sm:inline">Benchmarks</span>
+          </NavLink>
+          <NavLink to="/integrations" className={linkClass} activeClassName={activeClass}>
+            <Settings className="h-4 w-4" />
+            <span className="hidden sm:inline">Integrations</span>
           </NavLink>
         </nav>
       </div>

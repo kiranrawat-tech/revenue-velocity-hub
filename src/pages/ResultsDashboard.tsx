@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { Navbar } from "@/components/Navbar";
-import { defaultInputs, calculate } from "@/lib/calculations";
+import { defaultInputs, calculate, CalculatorInputs } from "@/lib/calculations";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
@@ -11,7 +11,13 @@ import { Users, Globe, Target, TrendingDown, Timer } from "lucide-react";
 const COLORS = ["hsl(42, 87%, 58%)", "hsl(42, 60%, 40%)", "hsl(30, 70%, 50%)"];
 
 export default function ResultsDashboard() {
-  const results = useMemo(() => calculate(defaultInputs), []);
+  // Load inputs from localStorage or use defaults
+  const inputs: CalculatorInputs = useMemo(() => {
+    const stored = localStorage.getItem('roi_calculator_inputs');
+    return stored ? JSON.parse(stored) : defaultInputs;
+  }, []);
+
+  const results = useMemo(() => calculate(inputs), [inputs]);
 
   return (
     <div className="min-h-screen">
@@ -37,10 +43,10 @@ export default function ResultsDashboard() {
               <BarChart data={[{ name: "Monthly", Baseline: results.baselineRevenue, Nurtured: results.nurturedRevenue }]}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(240,12%,20%)" />
                 <XAxis dataKey="name" stroke="hsl(220,10%,55%)" fontSize={12} />
-                <YAxis stroke="hsl(220,10%,55%)" fontSize={12} tickFormatter={(v: number) => `$${(v/1000).toFixed(0)}K`} />
+                <YAxis stroke="hsl(220,10%,55%)" fontSize={12} tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`} />
                 <RechartsTooltip contentStyle={{ background: "hsl(240,20%,10%)", border: "1px solid hsl(42,30%,18%)", borderRadius: 8, fontSize: 12 }} />
-                <Bar dataKey="Baseline" fill="hsl(240,12%,25%)" radius={[4,4,0,0]} />
-                <Bar dataKey="Nurtured" fill="hsl(42,87%,58%)" radius={[4,4,0,0]} />
+                <Bar dataKey="Baseline" fill="hsl(240,12%,25%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Nurtured" fill="hsl(42,87%,58%)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -68,7 +74,7 @@ export default function ResultsDashboard() {
               <LineChart data={results.monthlyProjections}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(240,12%,20%)" />
                 <XAxis dataKey="month" stroke="hsl(220,10%,55%)" fontSize={12} tickFormatter={(v: number) => `M${v}`} />
-                <YAxis stroke="hsl(220,10%,55%)" fontSize={12} tickFormatter={(v: number) => `$${(v/1000).toFixed(0)}K`} />
+                <YAxis stroke="hsl(220,10%,55%)" fontSize={12} tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`} />
                 <RechartsTooltip contentStyle={{ background: "hsl(240,20%,10%)", border: "1px solid hsl(42,30%,18%)", borderRadius: 8, fontSize: 12 }} />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
                 <Line type="monotone" dataKey="baseline" name="Without Nurturing" stroke="hsl(240,12%,35%)" strokeWidth={2} dot={false} />
